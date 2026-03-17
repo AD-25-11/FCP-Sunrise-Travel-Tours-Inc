@@ -109,10 +109,15 @@ const countryLandmarks = {
 };
 
 function initImageFallbacks(){
-  document.querySelectorAll('.country-card img').forEach(img => {
-    const country = img.alt;
-    const landmark = countryLandmarks[country] || 'landmark';
-    img.src = `https://source.unsplash.com/1200x800/?${landmark},${country},travel`;
+  document.querySelectorAll('.country-card img, .spot-card img').forEach(img => {
+    const loadFallback = () => {
+      const country = img.alt;
+      const landmark = countryLandmarks[country] || 'landmark';
+      img.src = `https://source.unsplash.com/1200x800/?${landmark},${country},travel`;
+    };
+
+    // Only replace the image if it fails to load (e.g. missing local file)
+    img.addEventListener('error', loadFallback);
   });
 }
 

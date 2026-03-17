@@ -1,0 +1,21 @@
+{
+  "name": "FCP Sunrise Travel & Tours Inc.",
+  "short_name": "FCP Sunrise",
+  "description": "Professional travel services, global destinations, and complete booking assistance.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#061622",
+  "theme_color": "#1498cc",
+  "icons": [
+    {
+      "src": "images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
