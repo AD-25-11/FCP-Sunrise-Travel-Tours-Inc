@@ -12,6 +12,109 @@ const continentPage = {
   'South America': 'south-america.html', 'Australia / Oceania': 'australia-oceania.html', 'Antarctica': 'antarctica-continent.html'
 };
 const countrySlugMap = { 'United States':'united-states','United Kingdom':'united-kingdom','South Korea':'south-korea','Hong Kong':'hong-kong','New Zealand':'new-zealand','Costa Rica':'costa-rica','Papua New Guinea':'papua-new-guinea','South Africa':'south-africa' };
+const countryLandmarks = {
+  'Japan': 'Tokyo',
+  'China': 'Great Wall',
+  'Philippines': 'Boracay',
+  'Thailand': 'Bangkok',
+  'Singapore': 'Marina Bay',
+  'South Korea': 'Seoul',
+  'Vietnam': 'Ha Long Bay',
+  'Indonesia': 'Bali',
+  'Malaysia': 'Petronas Towers',
+  'India': 'Taj Mahal',
+  'United Arab Emirates': 'Burj Khalifa',
+  'Turkey': 'Istanbul',
+  'Qatar': 'Doha',
+  'Saudi Arabia': 'Mecca',
+  'Nepal': 'Mount Everest',
+  'Sri Lanka': 'Sigiriya',
+  'Maldives': 'Maldives',
+  'Kazakhstan': 'Almaty',
+  'Pakistan': 'K2',
+  'Bangladesh': 'Sundarbans',
+  'Jordan': 'Petra',
+  'Israel': 'Jerusalem',
+  'Lebanon': 'Beirut',
+  'Oman': 'Muscat',
+  'Kuwait': 'Kuwait City',
+  'France': 'Eiffel Tower',
+  'Italy': 'Colosseum',
+  'Spain': 'Sagrada Familia',
+  'Germany': 'Brandenburg Gate',
+  'United Kingdom': 'Big Ben',
+  'Switzerland': 'Matterhorn',
+  'Netherlands': 'Windmills',
+  'Greece': 'Acropolis',
+  'Portugal': 'Belém Tower',
+  'Austria': 'Schonbrunn Palace',
+  'Belgium': 'Atomium',
+  'Croatia': 'Plitvice Lakes',
+  'Norway': 'Fjords',
+  'Sweden': 'Stockholm',
+  'Denmark': 'Little Mermaid',
+  'Finland': 'Northern Lights',
+  'Ireland': 'Dublin Castle',
+  'Poland': 'Wawel Castle',
+  'Czech Republic': 'Prague Castle',
+  'Hungary': 'Parliament Building',
+  'United States': 'Statue of Liberty',
+  'Canada': 'CN Tower',
+  'Mexico': 'Chichen Itza',
+  'Costa Rica': 'Monteverde',
+  'Jamaica': 'Montego Bay',
+  'Panama': 'Panama Canal',
+  'Bahamas': 'Nassau',
+  'Cuba': 'Havana',
+  'Dominican Republic': 'Punta Cana',
+  'Guatemala': 'Tikal',
+  'Honduras': 'Roatan',
+  'El Salvador': 'Suchitoto',
+  'Nicaragua': 'Granada',
+  'Brazil': 'Christ the Redeemer',
+  'Argentina': 'Buenos Aires',
+  'Peru': 'Machu Picchu',
+  'Chile': 'Easter Island',
+  'Colombia': 'Cartagena',
+  'Ecuador': 'Galapagos',
+  'Bolivia': 'Salar de Uyuni',
+  'Uruguay': 'Montevideo',
+  'Paraguay': 'Asuncion',
+  'Venezuela': 'Angel Falls',
+  'Egypt': 'Pyramids',
+  'Morocco': 'Bahia Palace',
+  'Kenya': 'Serengeti',
+  'South Africa': 'Table Mountain',
+  'Tanzania': 'Mount Kilimanjaro',
+  'Botswana': 'Okavango Delta',
+  'Rwanda': 'Gorillas',
+  'Uganda': 'Victoria Falls',
+  'Ethiopia': 'Axum',
+  'Ghana': 'Cape Coast Castle',
+  'Nigeria': 'Lagos',
+  'Madagascar': 'Baobab',
+  'Namibia': 'Dune 45',
+  'Zimbabwe': 'Victoria Falls',
+  'Australia': 'Sydney Opera House',
+  'New Zealand': 'Auckland',
+  'Fiji': 'Fiji',
+  'Papua New Guinea': 'Kokoda Track',
+  'Samoa': 'Samoa',
+  'Tonga': 'Tonga',
+  'Vanuatu': 'Vanuatu',
+  'Solomon Islands': 'Solomon Islands',
+  'Palau': 'Palau',
+  'Micronesia': 'Micronesia',
+  'Antarctica': 'Iceberg'
+};
+
+function initImageFallbacks(){
+  document.querySelectorAll('.country-card img').forEach(img => {
+    const country = img.alt;
+    const landmark = countryLandmarks[country] || 'landmark';
+    img.src = `https://source.unsplash.com/1200x800/?${landmark},${country},travel`;
+  });
+}
 
 function slugify(v){ return countrySlugMap[v] || v.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
 function countryUrl(c){ return `${slugify(c)}.html`; }
@@ -58,16 +161,17 @@ async function initGlobe(){
   ].map((r,i)=>({startLat:r[0],startLng:r[1],endLat:r[2],endLng:r[3],color:['#ffdf00','#ffd158'],dash:2200+i*140}));
   globe.arcsData(routes).arcColor('color').arcDashLength(.45).arcDashGap(.35).arcDashInitialGap(()=>Math.random()).arcDashAnimateTime('dash').arcAltitude(.22).arcStroke(.7);
 
-  const markers=[
-    {name:'Great Wall of China',country:'China',lat:40.4319,lng:116.5704},
-    {name:'Mount Fuji',country:'Japan',lat:35.3606,lng:138.7274},
-    {name:'Eiffel Tower',country:'France',lat:48.8584,lng:2.2945},
-    {name:'Statue of Liberty',country:'United States',lat:40.6892,lng:-74.0445},
-    {name:'Sydney Opera House',country:'Australia',lat:-33.8568,lng:151.2153},
-    {name:'Boracay Island',country:'Philippines',lat:11.9674,lng:121.9248},
-    {name:'Palawan',country:'Philippines',lat:9.8349,lng:118.7384}
+  const continentMarkers=[
+    {continent:'Asia',lat:34.0479,lng:100.6197},{continent:'Europe',lat:54.5260,lng:15.2551},{continent:'Africa',lat:8.7832,lng:34.5085},
+    {continent:'North America',lat:54.5260,lng:-105.2551},{continent:'South America',lat:-8.7832,lng:-55.4915},
+    {continent:'Australia / Oceania',lat:-25.2744,lng:133.7751},{continent:'Antarctica',lat:-82.8628,lng:135}
   ];
-  globe.pointsData(markers).pointLat('lat').pointLng('lng').pointRadius(.25).pointAltitude(.02).pointColor(()=> '#27dcff').pointLabel(d=>`${d.name}<br>${d.country}`).onPointClick(d=>window.location.href=countryUrl(d.country));
+
+  globe.pointsData(continentMarkers)
+    .pointLat('lat').pointLng('lng').pointRadius(2.2).pointAltitude(.09)
+    .pointColor(()=>'#ffdf00')
+    .pointLabel(d=>`Open ${d.continent}`)
+    .onPointClick(d=>{ if(continentPage[d.continent]) window.location.href=continentPage[d.continent]; });
 
   let hovered=null;
   try{
@@ -95,3 +199,4 @@ async function initGlobe(){
 
 initMusic();
 initGlobe();
+initImageFallbacks();
