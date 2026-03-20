@@ -1,0 +1,34 @@
+<svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fuselage" x1="41" y1="57" x2="220" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.42" stop-color="#EAF5FB"/>
+      <stop offset="1" stop-color="#A7BBC8"/>
+    </linearGradient>
+    <linearGradient id="wingMain" x1="113" y1="38" x2="176" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#A8BDC9"/>
+    </linearGradient>
+    <linearGradient id="wingLower" x1="122" y1="68" x2="196" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D8E7F0"/>
+      <stop offset="1" stop-color="#8FA4B2"/>
+    </linearGradient>
+    <linearGradient id="tailFin" x1="48" y1="30" x2="88" y2="64" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2FAFF"/>
+      <stop offset="1" stop-color="#8EA5B3"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="280" height="140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0F2940" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M32 74C32 64.1 39.8 55.9 49.7 55.3L178.4 47.8C188.1 47.2 197.7 50.1 205.4 55.9L250.3 90C254.9 93.5 252.4 100.8 246.6 100.8H214.2C210.8 100.8 207.5 99.8 204.7 98L171.1 76.4L145.2 78L131.6 99.3C129.7 102.2 126.5 103.9 123 103.9H95.6C91.2 103.9 88.7 98.9 91.2 95.3L101.3 80.6L51.5 83.6C40.8 84.3 32 75.8 32 74Z" fill="url(#fuselage)"/>
+    <path d="M103.4 62L176.1 24.9C179.5 23.2 183.5 23 187 24.3L199.7 29.2C204.5 31.1 205.3 37.6 201.1 40.5L142.1 80.4L103.4 62Z" fill="url(#wingMain)"/>
+    <path d="M125.3 73.3L197.4 99.2C200.8 100.4 204.6 99.9 207.5 97.6L219.1 88.9C223.2 85.8 222 79.5 217 77.9L149.1 56L125.3 73.3Z" fill="url(#wingLower)"/>
+    <path d="M41.6 58.4L71.8 31.2C73.9 29.3 76.7 28.3 79.5 28.3H93.4C98.3 28.3 100.8 34.2 97.3 37.6L79.1 55.2L41.6 58.4Z" fill="url(#tailFin)"/>
+    <path d="M60.4 84.2L76.8 106.5C79.6 110.2 76.9 115.4 72.2 115.4H60C57.3 115.4 54.7 114.3 52.8 112.3L31.8 89.8L60.4 84.2Z" fill="#A4B8C5"/>
+    <path d="M55 69.7H145.8" stroke="#F9FDFF" stroke-width="5.5" stroke-linecap="round" opacity="0.7"/>
+    <rect x="167" y="63" width="16" height="8" rx="4" fill="#6EC9FF" fill-opacity="0.78"/>
+    <path d="M178.4 47.8L219.1 50.6C226 51.1 232.7 53.5 238.1 57.7L261.1 75.6" stroke="#A1B7C4" stroke-width="4.5" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>
