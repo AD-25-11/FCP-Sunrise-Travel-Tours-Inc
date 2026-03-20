@@ -1,11 +1,456 @@
-<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>FCP Sunrise Travel & Tours Inc.</title><link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin><link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap' rel='stylesheet'><link rel='stylesheet' href='style.css'></head><body><header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html"><img src="images/logo.png" alt="FCP Sunrise logo"><div><strong>FCP Sunrise Travel & Tours Inc.</strong><span>Creating Memories. Breaking the Distance.</span></div></a><nav class="main-nav"><a href="index.html">Home</a><a href="destinations.html">Destinations</a><a href="services.html">Services</a><a href="booking.html">Booking</a><a href="contact.html">Contact</a></nav></div></header><main><section class='hero'><video autoplay muted loop playsinline><source src='https://cdn.coverr.co/videos/coverr-aerial-view-of-city-at-night-1579/1080p.mp4' type='video/mp4'></video><div class='overlay'></div><div class='hero-content container'><p>Sto. Tomas, Batangas • Canlubang, Laguna</p><h1>Explore the World with FCP Sunrise</h1><p>Professional travel services, global destinations, and complete booking assistance.</p><div class='actions'><a class='btn btn-primary' href='booking.html'>Book Now</a><a class='btn btn-secondary' href='destinations.html#globe'>Explore Globe</a></div></div></section><section class='section container'><div class='glass card'><h2>Welcome</h2><p>Use the navigation to open real pages for destinations, services, booking, and contact.</p></div></section></main><audio id='theme-song' src='audio/FCP Sunrise Theme.mp3' autoplay loop></audio><button id='music-toggle' class='music-toggle'>🎵</button><script src='https://unpkg.com/three'></script><script src='https://unpkg.com/globe.gl'></script><script src='script.js'></script><footer><div class='container'>© FCP Sunrise Travel & Tours Inc.</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FCP Sunrise Travel & Tours Inc.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-content {
+      max-width: 900px;
+    }
 
+    .about-section {
+      position: relative;
+      padding: 5.5rem 0;
+      overflow: hidden;
+    }
 
+    .about-section::before,
+    .about-section::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(16px);
+      opacity: 0.28;
+      pointer-events: none;
+    }
 
+    .about-section::before {
+      width: 260px;
+      height: 260px;
+      background: rgba(20, 152, 204, 0.28);
+      top: 2rem;
+      left: -5rem;
+    }
 
+    .about-section::after {
+      width: 220px;
+      height: 220px;
+      background: rgba(255, 223, 0, 0.16);
+      right: -4rem;
+      bottom: 3rem;
+    }
 
+    .about-shell {
+      position: relative;
+      z-index: 1;
+      padding: clamp(1.4rem, 3vw, 2rem);
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.12), rgba(7, 30, 45, 0.52));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+    }
 
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 1.5rem;
+      align-items: end;
+      margin-bottom: 2rem;
+    }
 
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.24em;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
 
+    .section-label::before {
+      content: "";
+      width: 2.5rem;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.85;
+    }
 
+    .about-title {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
 
+    .about-lead {
+      margin: 0;
+      color: rgba(237, 247, 255, 0.84);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.9fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .about-card {
+      position: relative;
+      padding: 1.5rem;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(180deg, rgba(5, 25, 38, 0.92), rgba(8, 35, 50, 0.78));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .profile-card {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: rgba(255, 223, 0, 0.92);
+      text-transform: uppercase;
+    }
+
+    .card-kicker .icon-badge {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      background: rgba(255, 223, 0, 0.12);
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .profile-card h3,
+    .mission-vision-card h3,
+    .testimonial-card h3 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+
+    .profile-copy {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .profile-copy p,
+    .mission-vision-card p,
+    .testimonial-card p,
+    .testimonial-card blockquote {
+      margin: 0;
+      color: rgba(237, 247, 255, 0.84);
+      line-height: 1.85;
+      font-size: 0.98rem;
+    }
+
+    .info-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .mission-vision-card {
+      display: grid;
+      gap: 0.9rem;
+      min-height: 100%;
+    }
+
+    .mini-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 223, 0, 0.92);
+      font-weight: 700;
+    }
+
+    .mini-label::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: rgba(255, 223, 0, 0.85);
+      box-shadow: 0 0 0 6px rgba(255, 223, 0, 0.12);
+    }
+
+    .mission-vision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .testimonials-wrap {
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .testimonial-card {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .testimonial-card blockquote {
+      position: relative;
+      padding-top: 0.2rem;
+    }
+
+    .testimonial-card blockquote::before {
+      content: "“";
+      position: absolute;
+      top: -0.75rem;
+      left: -0.15rem;
+      font-size: 3rem;
+      line-height: 1;
+      color: rgba(255, 223, 0, 0.28);
+      font-weight: 700;
+    }
+
+    .testimonial-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .testimonial-author::before {
+      content: "";
+      width: 2.2rem;
+      height: 1px;
+      background: rgba(255, 223, 0, 0.72);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.reveal-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    @media (max-width: 980px) {
+      .section-intro,
+      .about-grid,
+      .mission-vision-grid,
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .about-section {
+        padding: 4rem 0;
+      }
+
+      .about-card {
+        padding: 1.2rem;
+        border-radius: 18px;
+      }
+
+      .about-lead,
+      .profile-copy p,
+      .mission-vision-card p,
+      .testimonial-card p,
+      .testimonial-card blockquote {
+        font-size: 0.94rem;
+        line-height: 1.75;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .reveal.reveal-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html">
+        <img src="images/logo.png" alt="FCP Sunrise logo">
+        <div>
+          <strong>FCP Sunrise Travel &amp; Tours Inc.</strong>
+          <span>Creating Memories. Breaking the Distance.</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="services.html">Services</a>
+        <a href="booking.html">Booking</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <video autoplay muted loop playsinline>
+        <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-city-at-night-1579/1080p.mp4" type="video/mp4">
+      </video>
+      <div class="overlay"></div>
+      <div class="hero-content container reveal reveal-visible">
+        <p>Sto. Tomas, Batangas • Canlubang, Laguna</p>
+        <h1>Explore the World with FCP Sunrise</h1>
+        <p>Professional travel services, global destinations, and complete booking assistance.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="booking.html">Book Now</a>
+          <a class="btn btn-secondary" href="destinations.html#globe">Explore Globe</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="about-shell glass">
+          <div class="section-intro reveal">
+            <div>
+              <span class="section-label">ABOUT US</span>
+              <h2 class="about-title">WHO WE ARE</h2>
+            </div>
+            <p class="about-lead">Discover the trusted team behind seamless business trips, meaningful vacations, and carefully planned travel experiences across the Philippines and beyond.</p>
+          </div>
+
+          <div class="about-grid">
+            <article class="about-card profile-card reveal reveal-delay-1">
+              <div class="card-kicker"><span class="icon-badge">✦</span> COMPANY PROFILE</div>
+              <h3>COMPANY PROFILE</h3>
+              <div class="profile-copy">
+                <p>FCP SUNRISE TRAVEL AND TOURS INC. started its first mall branch in 2019. We are among the ranks of the most reputable and reliable travel agencies in the Philippines. We are led by our CEO with 18 years experience in the industry.</p>
+                <p>FCP Sunrise Travel and Tours Inc. is located at Checkpoint Mall Calamba City, SM Supermarket SM City Calamba and SM City Sto Tomas.</p>
+                <p>Major corporations, government organizations, business groups and solo travelers have entrusted their domestic and international travel arrangements with us including arrangements for business conventions, trainings, incentive travel and personal leisure or vacation travel for groups and individuals.</p>
+                <p>To ensure that our clients and customers get the best offers and deals, we have partnered with major hotels, resorts, transportation companies and reputable airlines.</p>
+                <p>True to our vision and mission as a reliable, customer-centric travel company, FCP Sunrise Travel and Tours Inc. has successfully made a name among its satisfied and loyal customers as their travel partner of choice for all seasons.</p>
+              </div>
+            </article>
+
+            <div class="info-stack">
+              <article class="about-card mission-vision-card reveal reveal-delay-2">
+                <span class="mini-label">Our Mission</span>
+                <h3>OUR MISSION</h3>
+                <p>To serve our current customers with best of our abilities, win new biddings and customers, and ensure total customer delight through excellent customer service experience by serving our clients with immediate response even beyond our office hours, reliable and client assured at all times that are all provided by our customer focused employees who are our valuable business partners in making a success on our vision of becoming the best travel service provider to our delighted customers and will be distinctly ahead in the industry.</p>
+              </article>
+
+              <article class="about-card mission-vision-card reveal reveal-delay-3">
+                <span class="mini-label">Our Vision</span>
+                <h3>OUR VISION</h3>
+                <p>FCP Sunrise Travel and Tours Inc. shall be the most excellent and effective travel service provider in the Philippines that consistently gives the best travel services focused on customer delight and extra mile to satisfy clients. We build rapport with our employees to ensure partnership with them and together, we are dedicated to make our company be outstanding and help boost the Philippine Tourism industry.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="testimonials-wrap">
+            <article class="about-card reveal reveal-delay-1">
+              <span class="mini-label">Testimonials</span>
+              <h3>TESTIMONIALS</h3>
+              <div class="testimonials-grid">
+                <article class="testimonial-card">
+                  <blockquote>5 stars!! From pre-work to check in: Our trip to Siargao this March 2021 wouldn't have been seamless if not because of the efforts done by manager Therese! She took care of us every step of the way with all the bumps and challenges. She made sure we are all set and settled in our most sought vacation! Book your next trip with FCP, you'll never regret it!</blockquote>
+                  <span class="testimonial-author">Gus Hontiveros Diamante</span>
+                </article>
+
+                <article class="testimonial-card">
+                  <blockquote>“Our honeymoon was magical, thanks to FCP's exquisite planning.”</blockquote>
+                  <span class="testimonial-author">Sara D.</span>
+                </article>
+
+                <article class="testimonial-card">
+                  <blockquote>“Thanks FCP Sunrise! We loved every second and would go back there in a heartbeat.”</blockquote>
+                  <span class="testimonial-author">Laura G.</span>
+                </article>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="glass card reveal reveal-delay-2">
+        <h2>Welcome</h2>
+        <p>Use the navigation to open real pages for destinations, services, booking, and contact.</p>
+      </div>
+    </section>
+  </main>
+
+  <audio id="theme-song" src="audio/FCP Sunrise Theme.mp3" autoplay loop></audio>
+  <button id="music-toggle" class="music-toggle">🎵</button>
+
+  <script src="https://unpkg.com/three"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="script.js"></script>
+  <script>
+    (function initHomepageReveal() {
+      const revealItems = document.querySelectorAll('.reveal:not(.hero-content)');
+      if (!revealItems.length) return;
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+        revealItems.forEach((item) => item.classList.add('reveal-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('reveal-visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: '0px 0px -60px 0px'
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
+    })();
+  </script>
+
+  <footer>
+    <div class="container">© FCP Sunrise Travel &amp; Tours Inc.</div>
+  </footer>
+</body>
+</html>
