@@ -145,56 +145,41 @@ img{max-width:100%}
   pointer-events:none;
   overflow:hidden;
 }
-.airplane-flight{
+.airplane-path{
   position:absolute;
   top:18%;
-  left:-26%;
-  width:min(260px, 34vw);
-  display:flex;
-  align-items:center;
-  gap:.75rem;
-  opacity:.96;
-  animation:fly-across 20s linear infinite;
+  left:-24%;
+  width:min(240px, 32vw);
+  opacity:.92;
+  animation:fly-across 18s linear infinite;
   will-change:transform;
 }
-.airplane-trail{
-  position:relative;
-  display:block;
-  width:clamp(90px, 14vw, 180px);
-  height:14px;
-  border-radius:999px;
-  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(160,241,255,.2) 38%, rgba(160,241,255,.45) 72%, rgba(255,224,133,.35));
-  filter:blur(3px);
-  transform:translateX(10px);
-}
-.airplane-trail::before,
-.airplane-trail::after{
+.airplane-path::before{
   content:"";
   position:absolute;
-  right:-4px;
+  left:-175%;
+  top:48%;
+  width:180%;
+  height:16px;
+  transform:translateY(-50%);
+  background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 20%, rgba(118,236,255,.26) 55%, rgba(255,215,106,.2) 100%);
+  filter:blur(7px);
   border-radius:999px;
+  opacity:.85;
 }
-.airplane-trail::before{
-  top:1px;
-  width:30px;
-  height:12px;
-  background:radial-gradient(circle at right, rgba(111,227,255,.85), rgba(111,227,255,0));
-  filter:blur(4px);
+.airplane-path::after{
+  content:"";
+  position:absolute;
+  left:-60%;
+  top:50%;
+  width:64%;
+  height:42px;
+  transform:translateY(-50%);
+  background:radial-gradient(circle at right, rgba(149,233,255,.55), rgba(149,233,255,0));
+  filter:blur(9px);
+  opacity:.7;
 }
-.airplane-trail::after{
-  top:4px;
-  width:54px;
-  height:6px;
-  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.26));
-  opacity:.75;
-}
-.airplane-jet{
-  display:block;
-  width:100%;
-  max-width:170px;
-  height:auto;
-  filter:drop-shadow(0 18px 30px rgba(3,17,27,.24));
-}
+.airplane-path img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 30px rgba(3,17,27,.24))}
 
 .promo-video-section{padding-top:0;margin-top:-1.75rem;z-index:2}
 .promo-video-shell{padding:1.1rem;background:linear-gradient(145deg, rgba(255,255,255,.28), rgba(6,35,51,.32));overflow:hidden;position:relative}
@@ -264,11 +249,10 @@ footer{padding:1rem 0 2rem;text-align:center;color:#dbf4ff}
 .typing-text:not(.is-typed){border-right:2px solid rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;animation:caret-blink .85s step-end infinite}
 
 @keyframes fly-across{
-  0%{transform:translate3d(0,0,0) rotate(-7deg)}
-  22%{transform:translate3d(34vw,-1.5vh,0) rotate(-3deg)}
-  52%{transform:translate3d(78vw,1.8vh,0) rotate(1deg)}
-  78%{transform:translate3d(112vw,.4vh,0) rotate(4deg)}
-  100%{transform:translate3d(148vw,-1.2vh,0) rotate(7deg)}
+  0%{transform:translate3d(0,0,0) scale(.98) rotate(-7deg)}
+  18%{transform:translate3d(36vw,-1.8vh,0) scale(1) rotate(-3deg)}
+  50%{transform:translate3d(76vw,2.2vh,0) scale(1.03) rotate(2deg)}
+  100%{transform:translate3d(142vw,-1vh,0) scale(.98) rotate(6deg)}
 }
 @keyframes caret-blink{50%{border-color:transparent}}
 
@@ -277,7 +261,7 @@ footer{padding:1rem 0 2rem;text-align:center;color:#dbf4ff}
   .field-grid{grid-template-columns:1fr}
   .brand span{display:none}
   .hero-content{padding-top:6.2rem}
-  .airplane-flight{top:12%;width:min(220px, 42vw)}
+  .airplane-path{top:12%;width:min(200px, 42vw)}
   .video-pill{justify-self:start}
 }
 @media(max-width:640px){
@@ -291,7 +275,7 @@ footer{padding:1rem 0 2rem;text-align:center;color:#dbf4ff}
   .hero p{font-size:.97rem}
   .btn{width:100%}
   .actions{align-items:stretch}
-  .airplane-flight{top:10%;left:-38%;width:min(210px, 54vw)}
+  .airplane-path{top:10%;width:min(172px, 46vw)}
   .promo-video-shell{padding:.8rem}
   .promo-video-header{padding:.6rem .4rem 1rem}
   .promo-video-frame{border-radius:20px}

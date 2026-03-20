@@ -1,34 +1,30 @@
-<svg width="280" height="140" viewBox="0 0 280 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="320" height="120" viewBox="0 0 320 120" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="fuselage" x1="41" y1="57" x2="220" y2="84" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFFFFF"/>
-      <stop offset="0.42" stop-color="#EAF5FB"/>
-      <stop offset="1" stop-color="#A7BBC8"/>
+    <linearGradient id="body" x1="42" y1="24" x2="252" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FDFEFF"/>
+      <stop offset="0.55" stop-color="#D8E7F0"/>
+      <stop offset="1" stop-color="#8BA7B8"/>
     </linearGradient>
-    <linearGradient id="wingMain" x1="113" y1="38" x2="176" y2="92" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8FBFF"/>
-      <stop offset="1" stop-color="#A8BDC9"/>
+    <linearGradient id="wing" x1="108" y1="28" x2="207" y2="99" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7FBFF"/>
+      <stop offset="1" stop-color="#A6BECC"/>
     </linearGradient>
-    <linearGradient id="wingLower" x1="122" y1="68" x2="196" y2="108" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#D8E7F0"/>
-      <stop offset="1" stop-color="#8FA4B2"/>
+    <linearGradient id="tail" x1="42" y1="22" x2="88" y2="74" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF8FF"/>
+      <stop offset="1" stop-color="#7C98AA"/>
     </linearGradient>
-    <linearGradient id="tailFin" x1="48" y1="30" x2="88" y2="64" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F2FAFF"/>
-      <stop offset="1" stop-color="#8EA5B3"/>
-    </linearGradient>
-    <filter id="shadow" x="0" y="0" width="280" height="140" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#0F2940" flood-opacity="0.24"/>
+    <filter id="shadow" x="0" y="0" width="320" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#184764" flood-opacity="0.28"/>
     </filter>
   </defs>
   <g filter="url(#shadow)">
-    <path d="M32 74C32 64.1 39.8 55.9 49.7 55.3L178.4 47.8C188.1 47.2 197.7 50.1 205.4 55.9L250.3 90C254.9 93.5 252.4 100.8 246.6 100.8H214.2C210.8 100.8 207.5 99.8 204.7 98L171.1 76.4L145.2 78L131.6 99.3C129.7 102.2 126.5 103.9 123 103.9H95.6C91.2 103.9 88.7 98.9 91.2 95.3L101.3 80.6L51.5 83.6C40.8 84.3 32 75.8 32 74Z" fill="url(#fuselage)"/>
-    <path d="M103.4 62L176.1 24.9C179.5 23.2 183.5 23 187 24.3L199.7 29.2C204.5 31.1 205.3 37.6 201.1 40.5L142.1 80.4L103.4 62Z" fill="url(#wingMain)"/>
-    <path d="M125.3 73.3L197.4 99.2C200.8 100.4 204.6 99.9 207.5 97.6L219.1 88.9C223.2 85.8 222 79.5 217 77.9L149.1 56L125.3 73.3Z" fill="url(#wingLower)"/>
-    <path d="M41.6 58.4L71.8 31.2C73.9 29.3 76.7 28.3 79.5 28.3H93.4C98.3 28.3 100.8 34.2 97.3 37.6L79.1 55.2L41.6 58.4Z" fill="url(#tailFin)"/>
-    <path d="M60.4 84.2L76.8 106.5C79.6 110.2 76.9 115.4 72.2 115.4H60C57.3 115.4 54.7 114.3 52.8 112.3L31.8 89.8L60.4 84.2Z" fill="#A4B8C5"/>
-    <path d="M55 69.7H145.8" stroke="#F9FDFF" stroke-width="5.5" stroke-linecap="round" opacity="0.7"/>
-    <rect x="167" y="63" width="16" height="8" rx="4" fill="#6EC9FF" fill-opacity="0.78"/>
-    <path d="M178.4 47.8L219.1 50.6C226 51.1 232.7 53.5 238.1 57.7L261.1 75.6" stroke="#A1B7C4" stroke-width="4.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M34 60C34 50.2 41.9 42 51.7 41.5L188.5 35.3C197.8 34.9 206.9 38 214 44L276.3 96.8C279.7 99.6 278 105 273.4 105H239.7C236.3 105 233 103.9 230.3 101.9L191.1 72.9L165.9 74.2L150.4 95.8C148.5 98.4 145.4 100 142.2 100H111.6C107.2 100 104.7 95.1 107.2 91.5L118.8 75.6L54.5 79C43.2 79.6 34 70.5 34 60Z" fill="url(#body)"/>
+    <path d="M117.5 54.5L190.8 15.7C193.8 14.1 197.4 13.9 200.6 15.1L214.7 20.3C219.5 22.1 220.3 28.6 216 31.5L153.5 73.8L117.5 54.5Z" fill="url(#wing)"/>
+    <path d="M138.3 65.8L215 93.5C218.2 94.7 221.7 94.2 224.6 92.1L236.9 83.3C241.1 80.2 240.1 73.7 235.1 72.1L162.8 48.4L138.3 65.8Z" fill="#B4CAD6"/>
+    <path d="M44.1 43.7L75.8 19.6C78 17.9 80.8 17 83.6 17H97.5C102.5 17 105 23.1 101.3 26.6L81.8 44.8L44.1 43.7Z" fill="url(#tail)"/>
+    <path d="M65.3 78.1L83.6 97.3C86.9 100.8 84.4 106.5 79.7 106.5H66.2C63.7 106.5 61.2 105.6 59.3 103.8L36.3 82.5L65.3 78.1Z" fill="#A1B9C6"/>
+    <rect x="78" y="48" width="78" height="7" rx="3.5" fill="#F8FCFF" fill-opacity="0.75"/>
+    <circle cx="194" cy="56" r="5" fill="#6EC9FF" fill-opacity="0.8"/>
+    <path d="M188.5 35.3L224.5 37.6C230.7 38 236.7 40.2 241.6 44L287.6 79.3" stroke="#9BB8C8" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
   </g>
 </svg>
