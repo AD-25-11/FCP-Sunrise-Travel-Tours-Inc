@@ -109,64 +109,143 @@ const countryLandmarks = {
 };
 
 function initImageFallbacks(){
-  document.querySelectorAll('.country-card img, .spot-card img').forEach(img => {
+  document.querySelectorAll('.country-card img, .spot-card img').forEach((img) => {
     const loadFallback = () => {
       const country = img.alt;
       const landmark = countryLandmarks[country] || 'landmark';
       img.src = `https://source.unsplash.com/1200x800/?${landmark},${country},travel`;
     };
 
-    // Only replace the image if it fails to load (e.g. missing local file)
     img.addEventListener('error', loadFallback);
   });
+}
+
+function initVideoFallbacks(){
+  document.querySelectorAll('video').forEach((video) => {
+    video.addEventListener('error', () => {
+      video.closest('.promo-video-frame, .hero')?.classList.add('media-fallback');
+    });
+  });
+}
+
+function initPageAnimations(){
+  const animatedItems = document.querySelectorAll('[data-animate]');
+  const typingItems = document.querySelectorAll('[data-typing]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    animatedItems.forEach((item) => item.classList.add('is-visible'));
+    typingItems.forEach((item) => {
+      item.textContent = item.dataset.typing || '';
+      item.classList.add('is-typed');
+    });
+    return;
+  }
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.18,
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  animatedItems.forEach((item) => {
+    if (item.closest('.hero')) {
+      requestAnimationFrame(() => item.classList.add('is-visible'));
+      return;
+    }
+    revealObserver.observe(item);
+  });
+
+  const typeText = (element) => {
+    const fullText = element.dataset.typing || '';
+    const speed = Number(element.dataset.typingSpeed || 26);
+    let index = 0;
+
+    const tick = () => {
+      element.textContent = fullText.slice(0, index);
+      index += 1;
+      if (index <= fullText.length) {
+        window.setTimeout(tick, speed);
+      } else {
+        element.classList.add('is-typed');
+      }
+    };
+
+    tick();
+  };
+
+  const typingObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      typeText(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, {
+    threshold: 0.45
+  });
+
+  typingItems.forEach((item) => typingObserver.observe(item));
 }
 
 function slugify(v){ return countrySlugMap[v] || v.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
 function countryUrl(c){ return `${slugify(c)}.html`; }
 
 function initMusic(){
-  const audio=document.getElementById('theme-song');
-  const btn=document.getElementById('music-toggle');
-  if(!audio||!btn) return;
-  const kick=()=>audio.play().catch(()=>{});
-  window.addEventListener('load',kick);
-  document.addEventListener('click',kick,{once:true});
-  btn.onclick=()=>{ if(audio.paused){audio.play();btn.textContent='🎵';} else {audio.pause();btn.textContent='🔇';} };
+  const audio = document.getElementById('theme-song');
+  const btn = document.getElementById('music-toggle');
+  if(!audio || !btn) return;
+  const kick = () => audio.play().catch(() => {});
+  window.addEventListener('load', kick);
+  document.addEventListener('click', kick, { once:true });
+  btn.onclick = () => {
+    if(audio.paused){
+      audio.play();
+      btn.textContent = '🎵';
+    } else {
+      audio.pause();
+      btn.textContent = '🔇';
+    }
+  };
 }
 
 function continentFromFeature(f){
-  const p=f.properties||{};
-  const c=(p.CONTINENT||p.continent||p.REGION_UN||'').toLowerCase();
+  const p = f.properties || {};
+  const c = (p.CONTINENT || p.continent || p.REGION_UN || '').toLowerCase();
   if(c.includes('asia')) return 'Asia';
   if(c.includes('europe')) return 'Europe';
   if(c.includes('africa')) return 'Africa';
   if(c.includes('north america')) return 'North America';
   if(c.includes('south america')) return 'South America';
-  if(c.includes('oceania')||c.includes('australia')) return 'Australia / Oceania';
+  if(c.includes('oceania') || c.includes('australia')) return 'Australia / Oceania';
   if(c.includes('antarctica')) return 'Antarctica';
-  const n=p.ADMIN||p.NAME||p.name||'';
+  const n = p.ADMIN || p.NAME || p.name || '';
   for(const [k,v] of Object.entries(continents)){ if(v.includes(n)) return k; }
   return 'Other';
 }
 
 async function initGlobe(){
-  const el=document.getElementById('globeViz');
+  const el = document.getElementById('globeViz');
   if(!el) return;
-  const status=document.getElementById('globeStatus');
-  const globe=Globe()(el)
+  const status = document.getElementById('globeStatus');
+  const globe = Globe()(el)
     .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
     .showAtmosphere(false)
     .width(el.clientWidth).height(el.clientHeight);
-  globe.controls().autoRotate=true;
-  globe.controls().autoRotateSpeed=.3;
+  globe.controls().autoRotate = true;
+  globe.controls().autoRotateSpeed = .3;
 
-  const routes=[
+  const routes = [
     [14.5995,120.9842,35.6762,139.6503],[14.5995,120.9842,1.3521,103.8198],[14.5995,120.9842,22.3193,114.1694],
     [14.5995,120.9842,25.2048,55.2708],[14.5995,120.9842,48.8566,2.3522],[14.5995,120.9842,34.0522,-118.2437]
-  ].map((r,i)=>({startLat:r[0],startLng:r[1],endLat:r[2],endLng:r[3],color:['#ffdf00','#ffd158'],dash:2200+i*140}));
-  globe.arcsData(routes).arcColor('color').arcDashLength(.45).arcDashGap(.35).arcDashInitialGap(()=>Math.random()).arcDashAnimateTime('dash').arcAltitude(.22).arcStroke(.7);
+  ].map((r,i)=>({startLat:r[0],startLng:r[1],endLat:r[2],endLng:r[3],color:['#ffd76a','#27d7c5'],dash:2200+i*140}));
+  globe.arcsData(routes).arcColor('color').arcDashLength(.45).arcDashGap(.35).arcDashInitialGap(() => Math.random()).arcDashAnimateTime('dash').arcAltitude(.22).arcStroke(.7);
 
-  const continentMarkers=[
+  const continentMarkers = [
     {continent:'Asia',lat:34.0479,lng:100.6197},{continent:'Europe',lat:54.5260,lng:15.2551},{continent:'Africa',lat:8.7832,lng:34.5085},
     {continent:'North America',lat:54.5260,lng:-105.2551},{continent:'South America',lat:-8.7832,lng:-55.4915},
     {continent:'Australia / Oceania',lat:-25.2744,lng:133.7751},{continent:'Antarctica',lat:-82.8628,lng:135}
@@ -174,34 +253,21 @@ async function initGlobe(){
 
   globe.pointsData(continentMarkers)
     .pointLat('lat').pointLng('lng').pointRadius(2.2).pointAltitude(.09)
-    .pointColor(()=>'#ffdf00')
-    .pointLabel(d=>`Open ${d.continent}`)
-    .onPointClick(d=>{ if(continentPage[d.continent]) window.location.href=continentPage[d.continent]; });
+    .pointColor(() => '#ffd76a')
+    .pointLabel((d) => `Open ${d.continent}`)
+    .onPointClick((d) => { if(continentPage[d.continent]) window.location.href = continentPage[d.continent]; });
 
-  let hovered=null;
   try{
-    // const geo=await fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson').then(r=>r.json());
-    // geo.features.forEach(f=>{f.properties.__continent=continentFromFeature(f);f.properties.__name=f.properties.ADMIN||f.properties.NAME||f.properties.name||'Unknown';});
-    // globe.polygonsData(geo.features)
-    //   .polygonAltitude(d=>d===hovered?.feature?0.06:0.01)
-    //   .polygonCapColor(d=>d===hovered?.feature?'rgba(255,223,0,.85)':'rgba(20,152,204,.25)')
-    //   .polygonSideColor(()=> 'rgba(8,80,112,.25)')
-    //   .polygonStrokeColor(()=> 'rgba(255,255,255,.28)')
-    //   .polygonLabel(d=>`${d.properties.__name}<br>${d.properties.__continent}`)
-    //   .onPolygonHover(d=>{hovered=d?{feature:d,continent:d.properties.__continent}:null; if(status) status.textContent=d?`Hover: ${d.properties.__continent} / ${d.properties.__name}`:'Hover and click a continent';})
-    //   .onPolygonClick(d=>{
-    //     if(!d) return;
-    //     const cont=d.properties.__continent;
-    //     if(continentPage[cont]) window.location.href=continentPage[cont];
-    //   });
-    if(status) status.textContent='Globe ready: click points or arcs.';
+    if(status) status.textContent = 'Globe ready: click points or arcs.';
   }catch(e){
-    if(status) status.textContent='Unable to load world boundaries from network in this environment.';
+    if(status) status.textContent = 'Unable to load world boundaries from network in this environment.';
     console.error(e);
   }
-  window.addEventListener('resize',()=>globe.width(el.clientWidth).height(el.clientHeight));
+  window.addEventListener('resize', () => globe.width(el.clientWidth).height(el.clientHeight));
 }
 
 initMusic();
 initGlobe();
 initImageFallbacks();
+initVideoFallbacks();
+initPageAnimations();
