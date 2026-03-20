@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     .hero-content {
-      max-width: 900px;
+      max-width: 960px;
     }
 
     .about-section {
@@ -25,22 +25,22 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(16px);
-      opacity: 0.28;
+      opacity: 0.3;
       pointer-events: none;
     }
 
     .about-section::before {
-      width: 260px;
-      height: 260px;
-      background: rgba(20, 152, 204, 0.28);
-      top: 2rem;
-      left: -5rem;
+      width: 280px;
+      height: 280px;
+      background: rgba(41, 182, 246, 0.24);
+      top: 1rem;
+      left: -4rem;
     }
 
     .about-section::after {
-      width: 220px;
-      height: 220px;
-      background: rgba(255, 223, 0, 0.16);
+      width: 240px;
+      height: 240px;
+      background: rgba(255, 215, 106, 0.18);
       right: -4rem;
       bottom: 3rem;
     }
@@ -49,8 +49,8 @@
       position: relative;
       z-index: 1;
       padding: clamp(1.4rem, 3vw, 2rem);
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.12), rgba(7, 30, 45, 0.52));
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.22);
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.14), rgba(7, 30, 45, 0.58));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
     }
 
     .section-intro {
@@ -88,7 +88,7 @@
 
     .about-lead {
       margin: 0;
-      color: rgba(237, 247, 255, 0.84);
+      color: rgba(237, 247, 255, 0.86);
       line-height: 1.8;
       font-size: 1rem;
     }
@@ -103,9 +103,9 @@
     .about-card {
       position: relative;
       padding: 1.5rem;
-      border-radius: 22px;
+      border-radius: 24px;
       border: 1px solid rgba(255, 255, 255, 0.16);
-      background: linear-gradient(180deg, rgba(5, 25, 38, 0.92), rgba(8, 35, 50, 0.78));
+      background: linear-gradient(180deg, rgba(5, 25, 38, 0.9), rgba(8, 35, 50, 0.75));
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
 
@@ -245,30 +245,6 @@
       background: rgba(255, 223, 0, 0.72);
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      will-change: opacity, transform;
-    }
-
-    .reveal.reveal-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .reveal-delay-1 {
-      transition-delay: 0.1s;
-    }
-
-    .reveal-delay-2 {
-      transition-delay: 0.2s;
-    }
-
-    .reveal-delay-3 {
-      transition-delay: 0.3s;
-    }
-
     @media (max-width: 980px) {
       .section-intro,
       .about-grid,
@@ -297,15 +273,6 @@
         line-height: 1.75;
       }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal,
-      .reveal.reveal-visible {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-    }
   </style>
 </head>
 <body>
@@ -319,7 +286,7 @@
         </div>
       </a>
       <nav class="main-nav">
-        <a href="index.html">Home</a>
+        <a href="index.html" class="active">Home</a>
         <a href="destinations.html">Destinations</a>
         <a href="services.html">Services</a>
         <a href="booking.html">Booking</a>
@@ -334,13 +301,41 @@
         <source src="https://cdn.coverr.co/videos/coverr-aerial-view-of-city-at-night-1579/1080p.mp4" type="video/mp4">
       </video>
       <div class="overlay"></div>
-      <div class="hero-content container reveal reveal-visible">
-        <p>Sto. Tomas, Batangas • Canlubang, Laguna</p>
-        <h1>Explore the World with FCP Sunrise</h1>
-        <p>Professional travel services, global destinations, and complete booking assistance.</p>
+      <div class="hero-sunburst"></div>
+      <div class="hero-airplane" aria-hidden="true">
+        <div class="airplane-flight">
+          <span class="airplane-trail"></span>
+          <img class="airplane-jet" src="images/airplane.svg" alt="">
+        </div>
+      </div>
+      <div class="hero-content container">
+        <span class="hero-badge" data-animate="fade-in">Summer escapes • Premium travel planning</span>
+        <p class="hero-copy" data-animate="fade-in" data-animate-delay="1">Sto. Tomas, Batangas • Canlubang, Laguna</p>
+        <h1 data-animate="fade-up" class="hero-title">Explore brighter summer journeys with FCP Sunrise.</h1>
+        <p class="typing-text" data-typing="Professional travel services, curated vacations, and seamless booking support for unforgettable global adventures."></p>
         <div class="actions">
-          <a class="btn btn-primary" href="booking.html">Book Now</a>
-          <a class="btn btn-secondary" href="destinations.html#globe">Explore Globe</a>
+          <a class="btn btn-primary" href="booking.html" data-animate="zoom-fade" data-animate-delay="1">Book Now</a>
+          <a class="btn btn-secondary" href="destinations.html#globe" data-animate="zoom-fade" data-animate-delay="2">Explore Globe</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section promo-video-section">
+      <div class="container">
+        <div class="promo-video-shell glass">
+          <div class="promo-video-header">
+            <div>
+              <span class="section-label" data-animate="slide-up">Summer Feature</span>
+              <h2 data-animate="slide-up" data-animate-delay="1">Watch your next getaway take off.</h2>
+              <p data-animate="fade-in" data-animate-delay="2">Enjoy a cinematic preview section designed for your homepage using the required relative video path for a polished, mobile-friendly summer showcase.</p>
+            </div>
+            <span class="video-pill" data-animate="fade-in" data-animate-delay="3">Responsive promo video</span>
+          </div>
+          <div class="promo-video-frame" data-animate="fade-up" data-animate-delay="2">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="videos/0308.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
       </div>
     </section>
@@ -348,59 +343,59 @@
     <section class="about-section">
       <div class="container">
         <div class="about-shell glass">
-          <div class="section-intro reveal">
+          <div class="section-intro">
             <div>
-              <span class="section-label">ABOUT US</span>
-              <h2 class="about-title">WHO WE ARE</h2>
+              <span class="section-label" data-animate="slide-up">ABOUT US</span>
+              <h2 class="about-title" data-animate="slide-up" data-animate-delay="1">WHO WE ARE</h2>
             </div>
-            <p class="about-lead">Discover the trusted team behind seamless business trips, meaningful vacations, and carefully planned travel experiences across the Philippines and beyond.</p>
+            <p class="about-lead" data-animate="fade-in" data-animate-delay="2">Discover the trusted team behind seamless business trips, meaningful vacations, and carefully planned travel experiences across the Philippines and beyond.</p>
           </div>
 
           <div class="about-grid">
-            <article class="about-card profile-card reveal reveal-delay-1">
+            <article class="about-card profile-card" data-animate="fade-in" data-animate-delay="1">
               <div class="card-kicker"><span class="icon-badge">✦</span> COMPANY PROFILE</div>
-              <h3>COMPANY PROFILE</h3>
+              <h3 data-animate="slide-up">COMPANY PROFILE</h3>
               <div class="profile-copy">
-                <p>FCP SUNRISE TRAVEL AND TOURS INC. started its first mall branch in 2019. We are among the ranks of the most reputable and reliable travel agencies in the Philippines. We are led by our CEO with 18 years experience in the industry.</p>
-                <p>FCP Sunrise Travel and Tours Inc. is located at Checkpoint Mall Calamba City, SM Supermarket SM City Calamba and SM City Sto Tomas.</p>
-                <p>Major corporations, government organizations, business groups and solo travelers have entrusted their domestic and international travel arrangements with us including arrangements for business conventions, trainings, incentive travel and personal leisure or vacation travel for groups and individuals.</p>
-                <p>To ensure that our clients and customers get the best offers and deals, we have partnered with major hotels, resorts, transportation companies and reputable airlines.</p>
-                <p>True to our vision and mission as a reliable, customer-centric travel company, FCP Sunrise Travel and Tours Inc. has successfully made a name among its satisfied and loyal customers as their travel partner of choice for all seasons.</p>
+                <p data-animate="fade-in">FCP SUNRISE TRAVEL AND TOURS INC. started its first mall branch in 2019. We are among the ranks of the most reputable and reliable travel agencies in the Philippines. We are led by our CEO with 18 years experience in the industry.</p>
+                <p data-animate="fade-in">FCP Sunrise Travel and Tours Inc. is located at Checkpoint Mall Calamba City, SM Supermarket SM City Calamba and SM City Sto Tomas.</p>
+                <p data-animate="fade-in">Major corporations, government organizations, business groups and solo travelers have entrusted their domestic and international travel arrangements with us including arrangements for business conventions, trainings, incentive travel and personal leisure or vacation travel for groups and individuals.</p>
+                <p data-animate="fade-in">To ensure that our clients and customers get the best offers and deals, we have partnered with major hotels, resorts, transportation companies and reputable airlines.</p>
+                <p data-animate="fade-in">True to our vision and mission as a reliable, customer-centric travel company, FCP Sunrise Travel and Tours Inc. has successfully made a name among its satisfied and loyal customers as their travel partner of choice for all seasons.</p>
               </div>
             </article>
 
             <div class="info-stack">
-              <article class="about-card mission-vision-card reveal reveal-delay-2">
+              <article class="about-card mission-vision-card" data-animate="fade-in" data-animate-delay="2">
                 <span class="mini-label">Our Mission</span>
-                <h3>OUR MISSION</h3>
-                <p>To serve our current customers with best of our abilities, win new biddings and customers, and ensure total customer delight through excellent customer service experience by serving our clients with immediate response even beyond our office hours, reliable and client assured at all times that are all provided by our customer focused employees who are our valuable business partners in making a success on our vision of becoming the best travel service provider to our delighted customers and will be distinctly ahead in the industry.</p>
+                <h3 data-animate="slide-up">OUR MISSION</h3>
+                <p data-animate="fade-in">To serve our current customers with best of our abilities, win new biddings and customers, and ensure total customer delight through excellent customer service experience by serving our clients with immediate response even beyond our office hours, reliable and client assured at all times that are all provided by our customer focused employees who are our valuable business partners in making a success on our vision of becoming the best travel service provider to our delighted customers and will be distinctly ahead in the industry.</p>
               </article>
 
-              <article class="about-card mission-vision-card reveal reveal-delay-3">
+              <article class="about-card mission-vision-card" data-animate="fade-in" data-animate-delay="3">
                 <span class="mini-label">Our Vision</span>
-                <h3>OUR VISION</h3>
-                <p>FCP Sunrise Travel and Tours Inc. shall be the most excellent and effective travel service provider in the Philippines that consistently gives the best travel services focused on customer delight and extra mile to satisfy clients. We build rapport with our employees to ensure partnership with them and together, we are dedicated to make our company be outstanding and help boost the Philippine Tourism industry.</p>
+                <h3 data-animate="slide-up">OUR VISION</h3>
+                <p data-animate="fade-in">FCP Sunrise Travel and Tours Inc. shall be the most excellent and effective travel service provider in the Philippines that consistently gives the best travel services focused on customer delight and extra mile to satisfy clients. We build rapport with our employees to ensure partnership with them and together, we are dedicated to make our company be outstanding and help boost the Philippine Tourism industry.</p>
               </article>
             </div>
           </div>
 
           <div class="testimonials-wrap">
-            <article class="about-card reveal reveal-delay-1">
+            <article class="about-card" data-animate="fade-in" data-animate-delay="1">
               <span class="mini-label">Testimonials</span>
-              <h3>TESTIMONIALS</h3>
+              <h3 data-animate="slide-up">TESTIMONIALS</h3>
               <div class="testimonials-grid">
-                <article class="testimonial-card">
+                <article class="testimonial-card" data-animate="fade-in" data-animate-delay="1">
                   <blockquote>5 stars!! From pre-work to check in: Our trip to Siargao this March 2021 wouldn't have been seamless if not because of the efforts done by manager Therese! She took care of us every step of the way with all the bumps and challenges. She made sure we are all set and settled in our most sought vacation! Book your next trip with FCP, you'll never regret it!</blockquote>
                   <span class="testimonial-author">Gus Hontiveros Diamante</span>
                 </article>
 
-                <article class="testimonial-card">
-                  <blockquote>“Our honeymoon was magical, thanks to FCP's exquisite planning.”</blockquote>
+                <article class="testimonial-card" data-animate="fade-in" data-animate-delay="2">
+                  <blockquote>Our honeymoon was magical, thanks to FCP's exquisite planning.</blockquote>
                   <span class="testimonial-author">Sara D.</span>
                 </article>
 
-                <article class="testimonial-card">
-                  <blockquote>“Thanks FCP Sunrise! We loved every second and would go back there in a heartbeat.”</blockquote>
+                <article class="testimonial-card" data-animate="fade-in" data-animate-delay="3">
+                  <blockquote>Thanks FCP Sunrise! We loved every second and would go back there in a heartbeat.</blockquote>
                   <span class="testimonial-author">Laura G.</span>
                 </article>
               </div>
@@ -411,9 +406,9 @@
     </section>
 
     <section class="section container">
-      <div class="glass card reveal reveal-delay-2">
-        <h2>Welcome</h2>
-        <p>Use the navigation to open real pages for destinations, services, booking, and contact.</p>
+      <div class="glass card" data-animate="fade-in" data-animate-delay="2">
+        <h2 data-animate="slide-up">Welcome</h2>
+        <p data-animate="fade-in">Use the navigation to open real pages for destinations, services, booking, and contact while enjoying a brighter, more premium summer-inspired homepage experience.</p>
       </div>
     </section>
   </main>
@@ -424,30 +419,6 @@
   <script src="https://unpkg.com/three"></script>
   <script src="https://unpkg.com/globe.gl"></script>
   <script src="script.js"></script>
-  <script>
-    (function initHomepageReveal() {
-      const revealItems = document.querySelectorAll('.reveal:not(.hero-content)');
-      if (!revealItems.length) return;
-
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-        revealItems.forEach((item) => item.classList.add('reveal-visible'));
-        return;
-      }
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('reveal-visible');
-          observer.unobserve(entry.target);
-        });
-      }, {
-        threshold: 0.18,
-        rootMargin: '0px 0px -60px 0px'
-      });
-
-      revealItems.forEach((item) => observer.observe(item));
-    })();
-  </script>
 
   <footer>
     <div class="container">© FCP Sunrise Travel &amp; Tours Inc.</div>
